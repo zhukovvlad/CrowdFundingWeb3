@@ -48,6 +48,13 @@ const CreateCampaign = () => {
             handleChange={() => {}}
           />
         </div>
+        <FormField
+          labelName="Story *"
+          placeholder="Write your story"
+          isTextArea
+          value={form.description}
+          handleChange={() => {}}
+        />
       </form>
     </div>
   );
