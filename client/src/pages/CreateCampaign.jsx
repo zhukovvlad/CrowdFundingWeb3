@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ethers } from "ethers";
+
+import { money } from "../assets";
+import { CustomButton } from "../components";
+import { checkIfImage } from "../utils";
 
 const CreateCampaign = () => {
-  return (
-    <div>CreateCampaign</div>
-  )
-}
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    title: "",
+    description: "",
+    target: "",
+    deadline: "",
+    image: "",
+  });
 
-export default CreateCampaign
+  return <div>CreateCampaign</div>;
+};
+
+export default CreateCampaign;
