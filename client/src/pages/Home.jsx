@@ -12,7 +12,6 @@ const Home = () => {
     setIsLoading(true);
     const data = await getCampaigns();
     setCampaigns(data);
-    console.log("Our data", data);
     setIsLoading(false);
   };
 
