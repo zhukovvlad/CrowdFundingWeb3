@@ -1,6 +1,10 @@
 import React from 'react'
 
-const FundCard = () => {
+import { tagType, thirdweb } from '../assets'
+import { daysLeft } from '../utils'
+
+const FundCard = ({owner, title, description, target, deadline, amountCollected, image, handleClick}) => {
+    const remainingDays = daysLeft(deadline);
   return (
     <div>FundCard</div>
   )
