@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { ethers } from "ethers";
 
 import { useStateContext } from "../context";
-import { CustomButton } from "../components";
+import { CountBox, CustomButton } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
 import { thirdweb } from "../assets";
 
@@ -12,10 +12,10 @@ const CampaignDetails = () => {
   const { getDonations, contract, address } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
-  const { amount, setAmount } = useState("");
-  const { donators, setDonators } = useState([]);
+  const [amount, setAmount] = useState("");
+  const [donators, setDonators] = useState([]);
 
-  const remainungDays = daysLeft(state.deadline);
+  const remainingDays = daysLeft(state.deadline);
 
   console.log(state);
   return (
@@ -28,6 +28,26 @@ const CampaignDetails = () => {
             alt="campaing"
             className="w-full h-[410px] object-cover rounded-xl"
           />
+          <div className="relative w-full h-[5px] bg-[#3a3a43] mt-2">
+            <div
+              className="absolute h-full bg=[#4acd8d]"
+              style={{
+                width: `${calculateBarPercentage(
+                  state.target,
+                  state.amountToCollect
+                )}%`,
+                maxWidth: "100%",
+              }}
+            ></div>
+          </div>
+        </div>
+        <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]">
+          <CountBox title="Days Left" value={remainingDays} />
+          <CountBox
+            title={`Raised of ${state.target}`}
+            value={state.amountCollected}
+          />
+          <CountBox title="Total Backers" value={donators.length} />
         </div>
       </div>
     </div>
