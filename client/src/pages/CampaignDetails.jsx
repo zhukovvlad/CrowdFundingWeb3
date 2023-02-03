@@ -9,6 +9,7 @@ import { thirdweb } from "../assets";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
+  console.log(state);
   const { donate, getDonations, contract, address } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -41,16 +42,16 @@ const CampaignDetails = () => {
         <div className="flex-1 flex-col">
           <img
             src={state.image}
-            alt="campaing"
+            alt="campaign"
             className="w-full h-[410px] object-cover rounded-xl"
           />
           <div className="relative w-full h-[5px] bg-[#3a3a43] mt-2">
             <div
-              className="absolute h-full bg=[#4acd8d]"
+              className="absolute h-full bg-[#4acd8d]"
               style={{
                 width: `${calculateBarPercentage(
                   state.target,
-                  state.amountToCollect
+                  state.amountCollected
                 )}%`,
                 maxWidth: "100%",
               }}
