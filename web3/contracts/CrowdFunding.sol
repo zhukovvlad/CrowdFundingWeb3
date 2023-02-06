@@ -53,19 +53,21 @@ contract CrowdFunding {
 
         Campaign storage campaign = campaigns[_id];
 
+        require(campaign.deadline < block.timestamp, "Campaign expired");
+
         campaign.donators.push(msg.sender);
         campaign.donations.push(amount);
 
-        (bool sent,) = payable(campaign.owner).call{value: amount}("");
-        
-        if(sent) {
+        (bool sent, ) = payable(campaign.owner).call{value: amount}("");
+
+        if (sent) {
             campaign.amountCollected = campaign.amountCollected + amount;
         }
     }
 
     function getDonators(uint256 _id)
-        view
         public
+        view
         returns (address[] memory, uint256[] memory)
     {
         return (campaigns[_id].donators, campaigns[_id].donations);
@@ -74,7 +76,7 @@ contract CrowdFunding {
     function getCampaigns() public view returns (Campaign[] memory) {
         Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
 
-        for(uint i = 0; i < numberOfCampaigns; i++) {
+        for (uint256 i = 0; i < numberOfCampaigns; i++) {
             Campaign storage item = campaigns[i];
 
             allCampaigns[i] = item;

@@ -30,10 +30,15 @@ const CampaignDetails = () => {
   const handleDonate = async () => {
     setIsLoading(true);
 
-    await donate(state.pId, amount);
+    try {
+      await donate(state.pId, amount);
 
-    navigate('/')
-    setIsLoading(false);
+      navigate("/");
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   };
 
   return (
